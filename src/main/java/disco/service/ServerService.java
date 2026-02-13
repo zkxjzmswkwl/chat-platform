@@ -13,10 +13,7 @@ public final class ServerService {
     private final ServerRepository servers;
     private final ServerMemberRepository members;
 
-    public ServerService(
-            ServerRepository servers,
-            ServerMemberRepository members
-    ) {
+    public ServerService(ServerRepository servers, ServerMemberRepository members) {
         this.servers = servers;
         this.members = members;
     }

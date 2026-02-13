@@ -24,6 +24,20 @@ public final class ServerMember {
         this.roles = EnumSet.copyOf(roles);
     }
 
+    public ServerMember(ServerId serverId2, UserId userId2, Instant instant, String[] strings) {
+        this.serverId = serverId2;
+        this.userId = userId2;
+        this.joinedAt = instant;
+        this.roles = EnumSet.noneOf(ServerRole.class);
+        for (String roleStr : strings) {
+            try {
+                ServerRole role = ServerRole.valueOf(roleStr);
+                roles.add(role);
+            } catch (IllegalArgumentException e) {
+            }
+        }
+    }
+
     public ServerId        serverId() { return serverId;          }
     public UserId          userId()   { return userId;            }
     public Instant         joinedAt() { return joinedAt;          }

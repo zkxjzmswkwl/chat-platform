@@ -8,6 +8,14 @@ public record UserId(UUID val) {
         return val.toString();
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserId userId = (UserId) o;
+        return val.equals(userId.val);
+    }
+
     public UUID value() {
         return val;
     }

@@ -49,6 +49,7 @@ public final class UserRepositoryImpl implements UserRepository {
         return new User(
             new UserId(r.get(USERS.ID)),
             r.get(USERS.USERNAME),
+            r.get(USERS.PASSWORD_HASH),
             r.get(USERS.CREATED_AT).toInstant()
         );
     }
