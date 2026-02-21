@@ -13,16 +13,16 @@ public final class RestRouter {
 
     private final RoutingHandler routes = new RoutingHandler();
 
-    public RestRouter(
-        UserService userService,
-        AuthorizationService auth,
-        MessageService messageService
-    ) {
+    public RestRouter(UserService userService, AuthorizationService auth,MessageService messageService) {
+        // reminder since I keep forgetting..
+        // undertow path params are joined with query params.
+        // from a route defined as `/users/{id}` and route where you are expecting `/users?id=X`
+        // `id` is available as a query param.
 
         // user shit
         UserController users = new UserController(userService);
         routes.add(Methods.POST, "/users", users::register);
-        routes.add(Methods.GET, "/users", users::get);
+        routes.add(Methods.GET, "/users/{id}", users::get);
 
         // message shit
         MessageController messages = new MessageController(messageService, auth);
