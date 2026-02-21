@@ -21,8 +21,8 @@ public final class RestRouter {
 
         // user shit
         UserController users = new UserController(userService);
-        routes.add(Methods.POST, "/api/users", users::register);
-        routes.add(Methods.GET, "/api/users", users::get);
+        routes.add(Methods.POST, "/users", users::register);
+        routes.add(Methods.GET, "/users", users::get);
 
         // message shit
         MessageController messages = new MessageController(messageService, auth);

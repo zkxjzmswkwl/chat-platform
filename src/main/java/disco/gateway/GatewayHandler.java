@@ -20,11 +20,7 @@ public final class GatewayHandler {
     private final MessageService messageService;
     private final ConnectionRegistry registry;
 
-    public GatewayHandler(
-        AuthorizationService authz,
-        MessageService messages,
-        ConnectionRegistry registry
-    ) {
+    public GatewayHandler(AuthorizationService authz, MessageService messages, ConnectionRegistry registry) {
         this.authService = authz;
         this.messageService = messages;
         this.registry = registry;
@@ -69,11 +65,7 @@ public final class GatewayHandler {
         }
     }
 
-    private void handleMessage(
-        UserId userId,
-        WebSocketChannel ch,
-        String raw
-    ) {
+    private void handleMessage(UserId userId, WebSocketChannel ch, String raw) {
         // parse
         {
 
