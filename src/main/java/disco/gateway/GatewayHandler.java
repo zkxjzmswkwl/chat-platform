@@ -1,5 +1,6 @@
 package disco.gateway;
 
+import java.io.IOException;
 import java.util.List;
 
 import disco.auth.AuthTokens;
@@ -46,31 +47,25 @@ public final class GatewayHandler {
                 return;
             }
 
-            UserId userId;
-            try {
-                userId = AuthTokens.verify(token);
-            } catch (Exception e) {
-                channel.sendClose();
-                return;
-            }
-
+            UserId userId = AuthTokens.verify(token);
             registry.add(userId, channel);
-
             channel.getCloseSetter().set(c -> registry.remove(userId));
-
             channel.getReceiveSetter().set(new AbstractReceiveListener() {
                 @Override
-                protected void onFullTextMessage(
-                    WebSocketChannel ch,
-                    BufferedTextMessage msg
-                ) {
+                protected void onFullTextMessage(WebSocketChannel ch, BufferedTextMessage msg) {
                     handleMessage(userId, ch, msg.getData());
                 }
             });
-
             channel.resumeReceives();
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            // don't like this
+            try {
+                channel.sendClose();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 

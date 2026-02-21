@@ -18,7 +18,7 @@ public final class App {
 
     public static void main(String[] args) {
         var ds = new HikariDataSource();
-        ds.setJdbcUrl("jdbc:postgresql://localhost:5432/disco-chat");
+        ds.setJdbcUrl("jdbc:postgresql://localhost:5434/disco-chat");
         ds.setUsername("postgres");
         ds.setPassword("example");
         var ctx = DSL.using(ds, org.jooq.SQLDialect.POSTGRES);
